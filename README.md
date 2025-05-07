@@ -11,6 +11,7 @@ A Python script to process audio files, trim them, and combine them.
 *   **Output Filename:** Specifies the name of the output file.
 *   **Segment Length:** Specifies the length of each audio segment to be included in the output (in seconds).
 *   **Random or Alphabetical Sorting:** Allows sorting of input files randomly or alphabetically.
+*   Supports loading a mix of MP3 and OGG files
 
 ## How to Run
 

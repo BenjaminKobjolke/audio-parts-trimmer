@@ -1,10 +1,10 @@
 import os
 
 class FileHandler:
-    def get_mp3_files(self, input_folder):
+    def get_audio_files(self, input_folder):
         """Lists all mp3 files in a given directory."""
         try:
-            return [f for f in os.listdir(input_folder) if f.endswith(".mp3")]
+            return [f for f in os.listdir(input_folder) if f.endswith(".mp3") or f.endswith(".ogg")]
         except FileNotFoundError:
             print(f"Input folder '{input_folder}' not found.")
             return []

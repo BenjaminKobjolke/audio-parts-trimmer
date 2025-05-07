@@ -31,14 +31,14 @@ class AudioProcessor:
 
     def load_audio_files(self):
         """Loads audio files from the input folder."""
-        mp3_files = self.file_handler.get_mp3_files(self.input_folder)
+        audio_files = self.file_handler.get_audio_files(self.input_folder)
         if self.random_sort:
-            random.shuffle(mp3_files)
-        audio_files = []
-        for filename in mp3_files:
+            random.shuffle(audio_files)
+        audio_files_list = []
+        for filename in audio_files:
             filepath = os.path.join(self.input_folder, filename)
-            audio_files.append(AudioFile(filepath, filename))
-        return audio_files
+            audio_files_list.append(AudioFile(filepath, filename))
+        return audio_files_list
 
     def combine_audio(self, audio_files):
         """Combines the trimmed audio files with pauses."""
@@ -47,7 +47,10 @@ class AudioProcessor:
         for i, audio_file in enumerate(audio_files):
             print(f"Processing file {i+1}/{total_files}: {audio_file.filename}")
             try:
-                audio = AudioSegment.from_mp3(audio_file.filepath)
+                if audio_file.filename.endswith(".ogg"):
+                    audio = AudioSegment.from_ogg(audio_file.filepath)
+                else:
+                    audio = AudioSegment.from_mp3(audio_file.filepath)
                 trimmed_audio = audio[:self.segment_length]
                 combined_audio += trimmed_audio
                 combined_audio += self.pause
